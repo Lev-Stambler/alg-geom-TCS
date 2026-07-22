@@ -56,14 +56,14 @@
       {\fontsize{6.8}{7.8}\selectfont
       \setlength{\abovedisplayskip}{0.7mm}
       \setlength{\belowdisplayskip}{0.7mm}
-      \textbf{1. Start with a machine that has two special targets.}
+      \textbf{1. The gadget.}
       Fix $H:\mathbb R^3\to\mathbb R^3$ with $\det JH\equiv-3456$,
       $H^{-1}(0)=\{r_0,r_+,r_-\}$, and one omitted target
       $\Delta\notin\operatorname{im}(H)$.  The decoder $\beta(x,y,z)=x^2$
       reads $r_0$ as $0$ and $r_\pm$ as $1$.
 
       \vspace{0.5mm}
-      \textbf{2. Use a Boolean value as a target switch.}
+      \textbf{2. The switch.}
       Define $T_s(v)=H(v)-(1-s)\Delta$.  Solving $T_s(v)=0$ is the same as
       asking $H$ to output $(1-s)\Delta$.  If $s=1$, this asks for $0$, which
       is possible.  If $s=0$, it asks for $\Delta$, which is impossible.  Thus
@@ -73,8 +73,8 @@
         \qquad(s\in\{0,1\}).
       \]
 
-      \textbf{3. See one clause, then stack all the blocks.}
-      For $C_j=X_a\lor\neg X_b\lor X_c$, set
+      \textbf{3. One clause and the stack.}
+      For example, for $C_j=X_a\lor\neg X_b\lor X_c$, set
       \[
         s_j=1-(1-\beta(w_a))\,\beta(w_b)\,(1-\beta(w_c)).
       \]
@@ -89,7 +89,7 @@
       $K_\phi=0$ exactly when the encoded assignment satisfies every clause.
 
       \vspace{0.5mm}
-      \textbf{4. The Jacobian remains constant.}
+      \textbf{4. The Jacobian.}
       Changing $s_j$ only translates the output of $H$; it does not change the
       derivative with respect to the fresh block $v_j$.  The full Jacobian is
       block lower triangular with $n+m$ copies of $JH$ on its diagonal, so
