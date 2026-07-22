@@ -36,14 +36,13 @@
       3SAT $\longrightarrow$ zero-finding with constant Jacobian}
     };
 
-  \node[anchor=north west,fill=bluepale,inner sep=2.3mm,text width=141.4mm]
+  \node[anchor=north west,fill=bluepale,inner sep=1.7mm,text width=142.6mm]
     at ([xshift=7mm,yshift=-19mm]current page.north west) {%
-      {\color{blue}\bfseries\fontsize{8}{9}\selectfont CLAIM}\par
-      \vspace{0.7mm}
-      {\fontsize{10}{11.5}\selectfont
-      For every $3$CNF formula $\phi$ with $n$ variables and $m$ clauses, one
-      can construct a degree-$7$ polynomial map
-      $K_\phi:\mathbb R^{3n+3m}\to\mathbb R^{3n+3m}$ such that
+      {\fontsize{8.5}{9.7}\selectfont
+      \textcolor{blue}{\textbf{CLAIM.}}
+      Given a $3$CNF formula $\phi$, construct a degree-$7$ map $K_\phi$ with
+      \setlength{\abovedisplayskip}{0.5mm}
+      \setlength{\belowdisplayskip}{0mm}
       \[
         K_\phi^{-1}(0)\ne\varnothing
         \iff \phi\in\mathrm{SAT},
@@ -53,18 +52,17 @@
     };
 
   \node[anchor=north west,inner sep=0pt,text width=146mm]
-    at ([xshift=7mm,yshift=-45.5mm]current page.north west) {%
-      {\fontsize{7.6}{9}\selectfont
-      \setlength{\abovedisplayskip}{1mm}
-      \setlength{\belowdisplayskip}{1mm}
+    at ([xshift=7mm,yshift=-34mm]current page.north west) {%
+      {\fontsize{6.8}{7.8}\selectfont
+      \setlength{\abovedisplayskip}{0.7mm}
+      \setlength{\belowdisplayskip}{0.7mm}
       \textbf{1. Start with a machine that has two special targets.}
-      Fix $H:\mathbb R^3\to\mathbb R^3$ with $\det JH\equiv-3456$.  The
-      machine can output $0$ in exactly three ways,
-      $H^{-1}(0)=\{r_0,r_+,r_-\}$, but it can never output one chosen value
-      $\Delta$.  Reading $\beta(x,y,z)=x^2$ turns those three inputs into one
-      bit: $r_0$ means $0$, while $r_+$ and $r_-$ mean $1$.
+      Fix $H:\mathbb R^3\to\mathbb R^3$ with $\det JH\equiv-3456$,
+      $H^{-1}(0)=\{r_0,r_+,r_-\}$, and one omitted target
+      $\Delta\notin\operatorname{im}(H)$.  The decoder $\beta(x,y,z)=x^2$
+      reads $r_0$ as $0$ and $r_\pm$ as $1$.
 
-      \vspace{0.7mm}
+      \vspace{0.5mm}
       \textbf{2. Use a Boolean value as a target switch.}
       Define $T_s(v)=H(v)-(1-s)\Delta$.  Solving $T_s(v)=0$ is the same as
       asking $H$ to output $(1-s)\Delta$.  If $s=1$, this asks for $0$, which
@@ -75,14 +73,22 @@
         \qquad(s\in\{0,1\}).
       \]
 
-      \textbf{3. Put one lock on every clause.}
-      The equations $H(w_i)=0$ force each variable to encode a bit.  Let
-      $s_j\in\{0,1\}$ be the polynomial value of clause $C_j$, and add the
-      equation $T_{s_j}(v_j)=0$.  The target-switch property says this equation
-      has a solution exactly when $C_j$ is true.  Therefore all blocks vanish
-      exactly when one assignment satisfies every clause.
+      \textbf{3. See one clause, then stack all the blocks.}
+      For $C_j=X_a\lor\neg X_b\lor X_c$, set
+      \[
+        s_j=1-(1-\beta(w_a))\,\beta(w_b)\,(1-\beta(w_c)).
+      \]
+      This is $1$ exactly when the clause is true. Attach its block
+      $T_{s_j}(v_j)=H(v_j)-(1-s_j)\Delta$. The complete map is the stack
+      \[
+        K_\phi=
+        \bigl(H(w_1),\ldots,H(w_n),
+        T_{s_1}(v_1),\ldots,T_{s_m}(v_m)\bigr).
+      \]
+      Each clause block can vanish exactly when its clause is true, so
+      $K_\phi=0$ exactly when the encoded assignment satisfies every clause.
 
-      \vspace{0.7mm}
+      \vspace{0.5mm}
       \textbf{4. The Jacobian remains constant.}
       Changing $s_j$ only translates the output of $H$; it does not change the
       derivative with respect to the fresh block $v_j$.  The full Jacobian is
