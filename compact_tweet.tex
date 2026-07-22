@@ -57,33 +57,37 @@
       {\fontsize{7.6}{9}\selectfont
       \setlength{\abovedisplayskip}{1mm}
       \setlength{\belowdisplayskip}{1mm}
-      \textbf{Proof idea.}
-      Fix a polynomial map $H:\mathbb R^3\to\mathbb R^3$ with
-      $\det JH\equiv-3456$, with exactly three preimages of zero,
-      $H^{-1}(0)=\{r_0,r_+,r_-\}$, and with some omitted target
-      $\Delta\notin\operatorname{im}(H)$.  The decoder
-      $\beta(x,y,z)=x^2$ reads $r_0$ as $0$ and $r_\pm$ as $1$.
+      \textbf{1. Start with a machine that has two special targets.}
+      Fix $H:\mathbb R^3\to\mathbb R^3$ with $\det JH\equiv-3456$.  The
+      machine can output $0$ in exactly three ways,
+      $H^{-1}(0)=\{r_0,r_+,r_-\}$, but it can never output one chosen value
+      $\Delta$.  Reading $\beta(x,y,z)=x^2$ turns those three inputs into one
+      bit: $r_0$ means $0$, while $r_+$ and $r_-$ mean $1$.
 
-      \vspace{0.8mm}
-      Given $\phi$, give each variable $X_i$ a block $w_i\in\mathbb R^3$ and
-      include $H(w_i)$ in the output.  Therefore every zero forces
-      $X_i=\beta(w_i)\in\{0,1\}$.  For each clause $C_j$, let $s_j$ be its
-      usual polynomial Boolean value, so $s_j=1$ exactly when $C_j$ is true.
-
-      \vspace{0.8mm}
-      Give the clause a fresh block $v_j$ and output
-      $T_{s_j}(v_j)=H(v_j)-(1-s_j)\Delta$.  Since $H$ reaches $0$ but never
-      reaches $\Delta$,
+      \vspace{0.7mm}
+      \textbf{2. Use a Boolean value as a target switch.}
+      Define $T_s(v)=H(v)-(1-s)\Delta$.  Solving $T_s(v)=0$ is the same as
+      asking $H$ to output $(1-s)\Delta$.  If $s=1$, this asks for $0$, which
+      is possible.  If $s=0$, it asks for $\Delta$, which is impossible.  Thus
       \[
-        \exists v_j:\ T_{s_j}(v_j)=0
-        \quad\Longleftrightarrow\quad s_j=1.
+        \exists v:\ T_s(v)=0
+        \quad\Longleftrightarrow\quad s=1
+        \qquad(s\in\{0,1\}).
       \]
 
-      Stack all variable and clause blocks to obtain $K_\phi$.  It has a zero
-      exactly when every clause is true.  Moreover, each $T_{s_j}$ differs
-      from $H$ only by an output translation, so $JK_\phi$ is block lower
-      triangular with copies of $JH$ on the diagonal.  Hence
-      $\det JK_\phi=(-3456)^{n+m}$, while $\deg K_\phi\le7$.}
+      \textbf{3. Put one lock on every clause.}
+      The equations $H(w_i)=0$ force each variable to encode a bit.  Let
+      $s_j\in\{0,1\}$ be the polynomial value of clause $C_j$, and add the
+      equation $T_{s_j}(v_j)=0$.  The target-switch property says this equation
+      has a solution exactly when $C_j$ is true.  Therefore all blocks vanish
+      exactly when one assignment satisfies every clause.
+
+      \vspace{0.7mm}
+      \textbf{4. The Jacobian remains constant.}
+      Changing $s_j$ only translates the output of $H$; it does not change the
+      derivative with respect to the fresh block $v_j$.  The full Jacobian is
+      block lower triangular with $n+m$ copies of $JH$ on its diagonal, so
+      $\det JK_\phi=(-3456)^{n+m}$ and $\deg K_\phi\le7$.}
     };
 \end{tikzpicture}
 
