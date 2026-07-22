@@ -259,13 +259,17 @@ solution.
 
 \subsection{The target selector}
 
-For a scalar $s$, define the map $T_s:\R^3\to\R^3$ by
+Define the two-input polynomial map
 \[
-T_s(v)=H(v)-(1-s)\Delta.
+T:\R^3\times\R\longrightarrow\R^3
+\]
+by
+\[
+T(v,s)=H(v)-(1-s)\Delta.
 \]
 The key observation is simply
 \[
-T_s(v)=0
+T(v,s)=0
 \quad\Longleftrightarrow\quad
 H(v)=(1-s)\Delta.
 \]
@@ -283,22 +287,22 @@ s & \text{target required from }H & \text{can }H\text{ hit it?} \\
 \begin{lemma}[Boolean target selector]
 For $s\in\{0,1\}$,
 \[
-T_s^{-1}(0)\neq\varnothing
+\exists v\in\R^3:\ T(v,s)=0
 \quad\Longleftrightarrow\quad
 s=1.
 \]
 Moreover,
 \[
-\det D_vT_s(v)\equiv -3456.
+\det D_vT(v,s)\equiv -3456.
 \]
 \end{lemma}
 
 \begin{proof}
-If $s=1$, then $T_1=H$, so for example $T_1(r_0)=0$.  If $s=0$, then
-$T_0(v)=0$ would imply $H(v)=\Delta$, which is impossible by the fixed-gadget
+If $s=1$, then $T(v,1)=H(v)$, so for example $T(r_0,1)=0$.  If $s=0$, then
+$T(v,0)=0$ would imply $H(v)=\Delta$, which is impossible by the fixed-gadget
 lemma.  Finally, $(1-s)\Delta$ is constant with respect to $v$, so
 \[
-D_vT_s(v)=JH(v).
+D_vT(v,s)=JH(v).
 \]
 The determinant claim follows from $\det JH\equiv-3456$.
 \end{proof}
@@ -383,15 +387,15 @@ v_j\in\R^3
 \]
 and include the output
 \[
-T_{s_j}(v_j)=H(v_j)-(1-s_j)\Delta.
+T(v_j,s_j(w))=H(v_j)-(1-s_j(w))\Delta.
 \]
 
 Because $s_j\in\{0,1\}$ at every solution of the variable equations, the
 target-selector lemma implies
 \[
-\exists v_j:\ T_{s_j}(v_j)=0
+\exists v_j:\ T(v_j,s_j(w))=0
 \quad\Longleftrightarrow\quad
-s_j=1.
+s_j(w)=1.
 \]
 
 In other words, $v_j$ is a witness that exists exactly when clause $C_j$ is
@@ -420,11 +424,11 @@ H(w_1)
 \\
 H(w_n)
 \\
-T_{s_1}(v_1)
+T(v_1,s_1(w))
 \\
 \vdots
 \\
-T_{s_m}(v_m)
+T(v_m,s_m(w))
 \end{pmatrix}.
 \]
 
@@ -460,7 +464,7 @@ Suppose first that $K_\phi(w,v)=0$.  Every variable block then satisfies
 $H(w_i)=0$, so the values $X_i=\beta(w_i)$ form a Boolean assignment.  Every
 clause block satisfies
 \[
-T_{s_j}(v_j)=0.
+T(v_j,s_j(w))=0.
 \]
 Since $s_j$ is Boolean, the target-selector lemma forces $s_j=1$.  Hence every
 clause is true under the decoded assignment, and $\phi$ is satisfiable.
@@ -477,7 +481,7 @@ r_+,&\sigma(X_i)=1.
 Then $H(w_i)=0$ and $\beta(w_i)=\sigma(X_i)$.  Since $\sigma$ satisfies every
 clause, every $s_j=1$.  Choose $v_j=r_0$ for all $j$; then
 \[
-T_{s_j}(v_j)=T_1(r_0)=H(r_0)=0.
+T(v_j,s_j(w))=T(r_0,1)=H(r_0)=0.
 \]
 Thus every output coordinate of $K_\phi$ vanishes.  We have proved
 \[
