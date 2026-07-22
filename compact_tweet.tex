@@ -11,6 +11,7 @@
 \usepackage{microtype}
 \usepackage{xcolor}
 \usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
 
 \definecolor{ink}{HTML}{14213D}
 \definecolor{blue}{HTML}{2864DC}
@@ -36,8 +37,16 @@
       3SAT $\longrightarrow$ zero-finding with constant Jacobian}
     };
 
+  \node[anchor=north west,inner sep=0pt,text width=146mm]
+    at ([xshift=7mm,yshift=-15mm]current page.north west) {%
+      {\color{muted}\fontsize{6.2}{7}\selectfont
+      Source gadget: Alpöge's announced Jacobian-conjecture counterexample
+      · \href{https://x.com/__alpoge__/status/2079028340955197566}%
+      {x.com/\_\_alpoge\_\_/status/2079028340955197566}}
+    };
+
   \node[anchor=north west,fill=bluepale,inner sep=1.7mm,text width=142.6mm]
-    at ([xshift=7mm,yshift=-19mm]current page.north west) {%
+    at ([xshift=7mm,yshift=-20mm]current page.north west) {%
       {\fontsize{8.5}{9.7}\selectfont
       \textcolor{blue}{\textbf{CLAIM.}}
       Given a $3$CNF formula $\phi$, construct a degree-at-most-$7$ map
@@ -53,7 +62,7 @@
     };
 
   \node[anchor=north west,inner sep=0pt,text width=146mm]
-    at ([xshift=7mm,yshift=-34mm]current page.north west) {%
+    at ([xshift=7mm,yshift=-35mm]current page.north west) {%
       {\fontsize{7.2}{8.35}\selectfont
       \setlength{\abovedisplayskip}{0.7mm}
       \setlength{\belowdisplayskip}{0.7mm}
